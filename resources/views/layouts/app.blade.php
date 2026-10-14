@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="uk">
 <style>
+    .field { margin-bottom: 16px; }
+    label { display: block; margin-bottom: 4px; }
+    input, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+    .error { color: #c0392b; font-size: 14px; margin-top: 4px; }
+    button { background: #1b2838; color: #fff; border: 0; padding: 10px 20px; cursor: pointer; }
+    button:hover { background: #66c0f4; }
     body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; }
     nav { background: #1b2838; padding: 14px 24px; }
     nav a { color: #c7d5e0; text-decoration: none; margin-right: 20px; }
