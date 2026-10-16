@@ -8,14 +8,17 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    // Показывает страницу с формой (пункты 2 и 5 задания)
-    public function show()
+    // Показує сторінку з формою зворотного зв'язку
+    public function showContactForm()
     {
-        return view('contact', ['platformName' => 'GameHub']);
+        return view('contact', [
+            'platformName' => 'GameHub',
+            'topics'       => ContactRequest::TOPICS,
+        ]);
     }
 
-    // Принимает форму: валидация, письмо, редирект (пункт 12 и доп. задание)
-    public function send(ContactRequest $request)
+    // Приймає форму: валідація (ContactRequest), лист, редирект
+    public function submitContactForm(ContactRequest $request)
     {
         $data = $request->validated();
 
@@ -25,8 +28,8 @@ class ContactController extends Controller
             ->with('sender_name', $data['name']);
     }
 
-    // Показывает страницу подтверждения
-    public function thanks()
+    // Показує сторінку підтвердження після успішної відправки
+    public function showContactThanks()
     {
         return view('contact-thanks');
     }

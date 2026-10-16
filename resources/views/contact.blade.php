@@ -22,6 +22,23 @@
         </div>
 
         <div class="field">
+            <label for="phone">Телефон</label>
+            <input type="text" id="phone" name="phone" value="{{ old('phone') }}" placeholder="+380501234567">
+            @error('phone')<div class="error">{{ $message }}</div>@enderror
+        </div>
+
+        <div class="field">
+            <label for="topic">Тема звернення</label>
+            <select id="topic" name="topic">
+                <option value="">— оберіть тему —</option>
+                @foreach($topics as $key => $label)
+                    <option value="{{ $key }}" @selected(old('topic') === $key)>{{ $label }}</option>
+                @endforeach
+            </select>
+            @error('topic')<div class="error">{{ $message }}</div>@enderror
+        </div>
+
+        <div class="field">
             <label for="message">Повідомлення</label>
             <textarea id="message" name="message" rows="5">{{ old('message') }}</textarea>
             @error('message')<div class="error">{{ $message }}</div>@enderror
