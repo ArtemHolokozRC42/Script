@@ -14,6 +14,12 @@
     main { max-width: 900px; margin: 30px auto; padding: 0 20px; }
     footer { background: #171a21; color: #8f98a0; text-align: center;
         padding: 20px; margin-top: 40px; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    th, td { border-bottom: 1px solid #ddd; padding: 8px; text-align: left; }
+    .pagination { display: flex; gap: 6px; list-style: none; padding: 0; }
+    .page-link { display: block; padding: 6px 12px; border: 1px solid #ccc; text-decoration: none; color: #1b2838; }
+    .active .page-link { background: #1b2838; color: #fff; }
+    .disabled .page-link { color: #999; }
 </style>
 <head>
     <meta charset="utf-8">
@@ -27,6 +33,7 @@
     <a href="{{ url('/library') }}">Бібліотека</a>
     <a href="{{ url('/about') }}">Про платформу</a>
     <a href="{{ url('/contact') }}">Контакти</a>
+    <a href="{{ route('country.index') }}">Країни</a>
 </nav>
 <main>
     @yield('content')
