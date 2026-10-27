@@ -20,6 +20,8 @@
     .page-link { display: block; padding: 6px 12px; border: 1px solid #ccc; text-decoration: none; color: #1b2838; }
     .active .page-link { background: #1b2838; color: #fff; }
     .disabled .page-link { color: #999; }
+    .filter { margin: 16px 0; }
+    .filter select { width: auto; }
 </style>
 <head>
     <meta charset="utf-8">
@@ -29,7 +31,7 @@
 <body>
 <nav>
     <a href="{{ url('/') }}">Головна</a>
-    <a href="{{ url('/catalog') }}">Каталог ігор</a>
+    <a href="{{ route('games.index') }}">Каталог ігор</a>
     <a href="{{ url('/library') }}">Бібліотека</a>
     <a href="{{ url('/about') }}">Про платформу</a>
     <a href="{{ url('/contact') }}">Контакти</a>
