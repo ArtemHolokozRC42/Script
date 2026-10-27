@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\GameController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,3 +12,4 @@ Route::get('/contact', [ContactController::class, 'showContactForm'])->name('con
 Route::post('/contact', [ContactController::class, 'submitContactForm'])->name('contact.send');
 Route::get('/contact/thanks', [ContactController::class, 'showContactThanks'])->name('contact.thanks');
 Route::resource('country', CountryController::class);
+Route::resource('games', GameController::class);
