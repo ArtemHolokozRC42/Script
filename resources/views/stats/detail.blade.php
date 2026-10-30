@@ -16,6 +16,8 @@
             <th>IP</th>
             <th>Статус</th>
             <th>Дата і час</th>
+            <th>Метод</th>
+            <th>Маршрут</th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +27,8 @@
                 <td>{{ $row->ip }}</td>
                 <td>{{ $row->status }}</td>
                 <td>{{ $row->visited_at->format('d.m.Y H:i:s') }}</td>
+                <td>{{ $row->method }}</td>
+                <td>{{ $row->route_name }}</td>
             </tr>
         @endforeach
         </tbody>

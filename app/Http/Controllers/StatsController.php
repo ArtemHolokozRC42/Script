@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tracker;
 use Illuminate\Http\Request;
+use App\Models\Game;
 
 class StatsController extends Controller
 {
@@ -39,5 +40,21 @@ class StatsController extends Controller
             ->withQueryString();
 
         return view('stats.detail', compact('rows', 'type', 'item'));
+    }
+    public function games()
+    {
+        $rows = Tracker::query()
+            ->where('route_name', 'games.show')
+            ->where('status', 200)
+            ->selectRaw('JSON_UNQUOTE(JSON_EXTRACT(meta, "$.game_id")) as game_id, count(*) as hits, max(visited_at) as last_visit')
+            ->groupBy('game_id')
+            ->orderByDesc('hits')
+            ->limit(10)
+            ->get();
+
+        // Назви ігор одним запитом, а не по одному на рядок
+        $titles = Game::whereIn('id', $rows->pluck('game_id'))->pluck('title', 'id');
+
+        return view('stats.games', compact('rows', 'titles'));
     }
 }

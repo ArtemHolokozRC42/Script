@@ -7,7 +7,8 @@
 
     <p>
         <a href="{{ route('stats.pages', ['type' => 'page']) }}">За сторінками</a> |
-        <a href="{{ route('stats.pages', ['type' => 'ip']) }}">За IP-адресами</a>
+        <a href="{{ route('stats.pages', ['type' => 'ip']) }}">За IP-адресами</a>  |
+        <a href="{{ route('stats.games') }}">Популярні ігри</a>
     </p>
 
     <table>

@@ -16,3 +16,5 @@ Route::resource('country', CountryController::class);
 Route::resource('games', GameController::class);
 Route::get('/stats', [StatsController::class, 'pages'])->name('stats.pages');
 Route::get('/stats/detail', [StatsController::class, 'detail'])->name('stats.detail');
+Route::get('/phpinfo', fn () => phpinfo());
+Route::get('/stats/games', [StatsController::class, 'games'])->name('stats.games');

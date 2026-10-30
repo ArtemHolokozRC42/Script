@@ -9,10 +9,17 @@ class Tracker extends Model
     protected $table = 'tracker';
 
     public $timestamps = false;
-    protected $fillable = ['page', 'ip', 'status', 'visited_at'];
+
+    protected $fillable = [
+        'page', 'ip', 'status', 'visited_at',
+        'method', 'route_name', 'meta',
+    ];
 
     protected function casts(): array
     {
-        return ['visited_at' => 'datetime'];
+        return [
+            'visited_at' => 'datetime',
+            'meta'       => 'array',
+        ];
     }
 }
