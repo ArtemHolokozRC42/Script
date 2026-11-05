@@ -16,12 +16,19 @@
         padding: 20px; margin-top: 40px; }
     table { width: 100%; border-collapse: collapse; margin: 16px 0; }
     th, td { border-bottom: 1px solid #ddd; padding: 8px; text-align: left; }
-    .pagination { display: flex; gap: 6px; list-style: none; padding: 0; }
-    .page-link { display: block; padding: 6px 12px; border: 1px solid #ccc; text-decoration: none; color: #1b2838; }
-    .active .page-link { background: #1b2838; color: #fff; }
-    .disabled .page-link { color: #999; }
+    .pagination { display: flex; gap: 14px; align-items: center; margin: 16px 0; }
+    .pagination a { color: #1b2838; }
+    .pagination .disabled { color: #999; }
+    .pagination .info { color: #555; }
     .filter { margin: 16px 0; }
     .filter select { width: auto; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin: 24px 0; }
+    .blog-card { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; background: #fff; transition: transform 0.2s, box-shadow 0.2s; }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); }
+    .blog-card-image { width: 100%; height: 180px; object-fit: cover; display: block; }
+    .blog-card-body { padding: 16px; }
+    .blog-category { font-size: 13px; color: #2563eb; }
+    .blog-meta { font-size: 13px; color: #666; }
 </style>
 <head>
     <meta charset="utf-8">
@@ -36,13 +43,15 @@
     <a href="{{ url('/about') }}">Про платформу</a>
     <a href="{{ url('/contact') }}">Контакти</a>
     <a href="{{ route('country.index') }}">Країни</a>
+    <a href="{{ route('blog.index') }}">Блог</a>
+    <a href="{{ route('blog.admin') }}">Адмін блогу</a>
 </nav>
 <main>
     @yield('content')
 </main>
 <footer>
     <p>&copy; {{ date('Y') }} GameHub — платформа дистрибуції відеоігор</p>
-    <p>Виконав: Голокоз Артем Віталійович</p>
+    <p>Виконав: Голокоз Артем Віталійович, група РС-42</p>
     <p>КПІ ім. Ігоря Сікорського</p>
 </footer>
 </body>
