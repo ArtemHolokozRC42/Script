@@ -6,6 +6,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\GameTranslationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,3 +21,7 @@ Route::resource('games', GameController::class);
 Route::get('/stats', [StatsController::class, 'pages'])->name('stats.pages');
 Route::get('/stats/detail', [StatsController::class, 'detail'])->name('stats.detail');
 Route::get('/stats/games', [StatsController::class, 'games'])->name('stats.games');
+Route::get('/games/{game}/translations', [GameTranslationController::class, 'edit'])
+    ->name('games.translations.edit');
+Route::put('/games/{game}/translations', [GameTranslationController::class, 'update'])
+    ->name('games.translations.update');

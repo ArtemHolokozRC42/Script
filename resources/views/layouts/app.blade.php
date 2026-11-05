@@ -29,6 +29,9 @@
     .blog-card-body { padding: 16px; }
     .blog-category { font-size: 13px; color: #2563eb; }
     .blog-meta { font-size: 13px; color: #666; }
+    .lang-switch { float: right; }
+    .lang-switch a { margin-left: 10px; }
+    .lang-switch .active-lang { font-weight: bold; border-bottom: 2px solid #66c0f4; }
 </style>
 <head>
     <meta charset="utf-8">
@@ -45,6 +48,12 @@
     <a href="{{ route('country.index') }}">Країни</a>
     <a href="{{ route('blog.index') }}">Блог</a>
     <a href="{{ route('blog.admin') }}">Адмін блогу</a>
+    <span class="lang-switch">
+    @foreach (config('app.supported_locales') as $code => $label)
+            <a href="{{ request()->fullUrlWithQuery(['lang' => $code]) }}"
+           @class(['active-lang' => app()->getLocale() === $code])>{{ strtoupper($code) }}</a>
+        @endforeach
+</span>
 </nav>
 <main>
     @yield('content')

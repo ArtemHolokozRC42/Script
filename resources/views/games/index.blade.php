@@ -30,7 +30,7 @@
         @forelse ($games as $i => $game)
             <tr>
                 <td>{{ $games->firstItem() + $i }}</td>
-                <td><a href="{{ route('games.show', $game) }}">{{ $game->title }}</a></td>
+                <td><a href="{{ route('games.show', $game) }}">{{ $game->localizedTitle() }}</a></td>
                 <td>{{ $game->genre }}</td>
                 <td>{{ $game->developer }}</td>
                 <td>${{ number_format($game->price, 2, ',', ' ') }}</td>

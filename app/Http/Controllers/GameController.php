@@ -14,6 +14,7 @@ class GameController extends Controller
         $genre = $request->query('genre');
 
         $games = Game::query()
+            ->with('translations')
             ->when($genre, fn ($query) => $query->where('genre', $genre))
             ->orderBy('title')
             ->paginate(5)
@@ -38,6 +39,8 @@ class GameController extends Controller
 
     public function show(Game $game)
     {
+        $game->load('translations');
+
         return view('games.show', compact('game'));
     }
 
