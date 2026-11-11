@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="uk">
 <style>
+    .tags { margin: 10px 0; }
+    .tag { display: inline-block; background: #e8eef5; border-radius: 4px; padding: 2px 8px; margin: 0 4px 4px 0; font-size: 13px; }
+    .blog-filters a { margin-right: 12px; }
+    .blog-filters .active-filter { font-weight: bold; border-bottom: 2px solid #66c0f4; }
     .field { margin-bottom: 16px; }
     label { display: block; margin-bottom: 4px; }
     input, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
@@ -48,6 +52,7 @@
     <a href="{{ route('country.index') }}">Країни</a>
     <a href="{{ route('blog.index') }}">Блог</a>
     <a href="{{ route('blog.admin') }}">Адмін блогу</a>
+    <a href="{{ route('filters.index') }}">Мітки</a>
     <span class="lang-switch">
     @foreach (config('app.supported_locales') as $code => $label)
             <a href="{{ request()->fullUrlWithQuery(['lang' => $code]) }}"
