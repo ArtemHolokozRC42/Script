@@ -41,6 +41,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'GameHub')</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
 <nav>
@@ -53,6 +54,7 @@
     <a href="{{ route('blog.index') }}">Блог</a>
     <a href="{{ route('blog.admin') }}">Адмін блогу</a>
     <a href="{{ route('filters.index') }}">Мітки</a>
+    <a href="{{ route('platforms.index') }}">Платформи</a>
     <span class="lang-switch">
     @foreach (config('app.supported_locales') as $code => $label)
             <a href="{{ request()->fullUrlWithQuery(['lang' => $code]) }}"

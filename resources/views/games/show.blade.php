@@ -13,6 +13,14 @@
     <p><strong>Розробник:</strong> {{ $game->developer }}</p>
     <p><strong>Ціна:</strong> ${{ number_format($game->price, 2, ',', ' ') }}</p>
     <p><strong>Рік випуску:</strong> {{ $game->release_year }}</p>
+    <p>
+        <strong>Платформи:</strong>
+        @forelse ($game->platforms as $platform)
+            <span class="tag">{{ $platform->name }}</span>
+        @empty
+            —
+        @endforelse
+    </p>
     <p><strong>Опис:</strong> {{ $game->localizedDescription() ?? '—' }}</p>
 
     <p>

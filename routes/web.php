@@ -8,6 +8,7 @@ use App\Http\Controllers\StatsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\GameTranslationController;
 use App\Http\Controllers\FilterController;
+use App\Http\Controllers\PlatformController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,3 +28,4 @@ Route::get('/games/{game}/translations', [GameTranslationController::class, 'edi
 Route::put('/games/{game}/translations', [GameTranslationController::class, 'update'])
     ->name('games.translations.update');
 Route::resource('filters', FilterController::class)->except(['show']);
+Route::get('/platforms', [PlatformController::class, 'index'])->name('platforms.index');

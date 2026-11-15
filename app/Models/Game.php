@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Game extends Model
@@ -14,6 +15,11 @@ class Game extends Model
     public function translations(): HasMany
     {
         return $this->hasMany(GameTranslation::class);
+    }
+
+    public function platforms(): BelongsToMany
+    {
+        return $this->belongsToMany(Platform::class, 'game_platform', 'game_id', 'platform_id');
     }
 
     // Переклад на вказану (або поточну) мову; null, якщо його немає

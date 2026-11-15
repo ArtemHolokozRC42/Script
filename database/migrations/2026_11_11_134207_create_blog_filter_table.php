@@ -1,16 +1,25 @@
-public function up(): void
-{
-Schema::create('blog_filter', function (Blueprint $table) {
-$table->foreignId('blog_id')
-->constrained('blog', 'blog_id')->cascadeOnDelete();
-$table->foreignId('filter_id')
-->constrained('filter', 'filter_id')->cascadeOnDelete();
+<?php
 
-$table->primary(['blog_id', 'filter_id']);
-});
-}
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-public function down(): void
+return new class extends Migration
 {
-Schema::dropIfExists('blog_filter');
-}
+    public function up(): void
+    {
+        Schema::create('blog_filter', function (Blueprint $table) {
+            $table->foreignId('blog_id')
+                ->constrained('blog', 'blog_id')->cascadeOnDelete();
+            $table->foreignId('filter_id')
+                ->constrained('filter', 'filter_id')->cascadeOnDelete();
+
+            $table->primary(['blog_id', 'filter_id']);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('blog_filter');
+    }
+};
