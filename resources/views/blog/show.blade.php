@@ -18,4 +18,11 @@
         <a href="{{ route('blog.edit', $blog) }}">Редагувати</a> |
         <a href="{{ route('blog.index') }}">До блогу</a>
     </p>
+    <div class="tags">
+        @forelse ($blog->filters as $filter)
+            <span class="tag">{{ $filter->filter_name }}</span>
+        @empty
+            <span>Міток немає.</span>
+        @endforelse
+    </div>
 @endsection

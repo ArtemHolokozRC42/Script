@@ -33,3 +33,15 @@
     <textarea id="description" name="description" rows="4">{{ old('description', $game->description ?? '') }}</textarea>
     @error('description')<div class="error">{{ $message }}</div>@enderror
 </div>
+<div class="field">
+    <label for="platforms">Платформи</label>
+    <select id="platforms" name="platforms[]" multiple>
+        @foreach ($platforms as $id => $name)
+            <option value="{{ $id }}" @selected(in_array($id, old('platforms', $selected ?? [])))>
+                {{ $name }}
+            </option>
+        @endforeach
+    </select>
+    @error('platforms')<div class="error">{{ $message }}</div>@enderror
+    @error('platforms.*')<div class="error">{{ $message }}</div>@enderror
+</div>

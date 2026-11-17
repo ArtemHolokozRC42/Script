@@ -23,7 +23,7 @@
         <thead>
         <tr>
             <th>#</th><th>Назва</th><th>Жанр</th><th>Розробник</th>
-            <th>Ціна</th><th>Рік</th><th>Дії</th>
+            <th>Ціна</th><th>Рік</th><th>Платформ</th><th>Дії</th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +35,7 @@
                 <td>{{ $game->developer }}</td>
                 <td>${{ number_format($game->price, 2, ',', ' ') }}</td>
                 <td>{{ $game->release_year }}</td>
+                <td>{{ $game->platforms_count }}</td>
                 <td>
                     <a href="{{ route('games.edit', $game) }}">Редагувати</a>
                     <form method="POST" action="{{ route('games.destroy', $game) }}"
@@ -46,7 +47,7 @@
                 </td>
             </tr>
         @empty
-            <tr><td colspan="7">Ігор не знайдено.</td></tr>
+            <tr><td colspan="8">Ігор не знайдено.</td></tr>
         @endforelse
         </tbody>
     </table>
