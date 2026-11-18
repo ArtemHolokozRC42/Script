@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use App\Queries\BlogFilter;
 
 class BlogController extends Controller
 {
@@ -38,13 +39,25 @@ class BlogController extends Controller
         return view('blog.index', compact('blogs', 'filters', 'filterId'));
     }
 
-    public function admin()
+    public function admin(Request $request, BlogFilter $filter)
     {
-        $blogs = Blog::with('category')
-            ->orderByDesc('dt_created')
-            ->paginate(10);
+        $input = $request->validate([
+            'title'        => ['nullable', 'string', 'max:200'],
+            'categoryName' => ['nullable', 'string', 'max:100'],
+            'category_id'  => ['nullable', 'integer', 'exists:category,category_id'],
+            'filter_id'    => ['nullable', 'integer', 'exists:filter,filter_id'],
+            'sort'         => ['nullable', 'string', 'max:30'],
+        ]);
 
-        return view('blog.admin', compact('blogs'));
+        $blogs = $filter->apply($input)
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('blog.admin', [
+            'blogs'      => $blogs,
+            'categories' => Category::orderBy('category_name')->pluck('category_name', 'category_id'),
+            'filters'    => Filter::orderBy('filter_name')->pluck('filter_name', 'filter_id'),
+        ]);
     }
 
     public function create()

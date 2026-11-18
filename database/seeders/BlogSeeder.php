@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
+use App\Models\Filter;
 
 class BlogSeeder extends Seeder
 {
@@ -13,13 +14,13 @@ class BlogSeeder extends Seeder
         $categories = [];
 
         foreach (['Новини', 'Технології', 'Події'] as $name) {
-            $categories[] = Category::firstOrCreate([
-                'category_name' => $name,
-            ]);
+            $categories[] = Category::firstOrCreate(['category_name' => $name]);
         }
 
-        for ($i = 1; $i <= 8; $i++) {
-            Blog::updateOrCreate(
+        $filterIds = Filter::pluck('filter_id')->all();
+
+        for ($i = 1; $i <= 15; $i++) {
+            $blog = Blog::updateOrCreate(
                 ['title' => "Навчальний запис №{$i}"],
                 [
                     'description' => "Короткий опис запису №{$i}",
@@ -28,6 +29,11 @@ class BlogSeeder extends Seeder
                     'user_id'     => null,
                 ]
             );
+
+            // Кожному запису призначаємо 1-2 мітки
+            if ($filterIds) {
+                $blog->filters()->sync(array_slice($filterIds, $i % count($filterIds), 2));
+            }
         }
     }
 }

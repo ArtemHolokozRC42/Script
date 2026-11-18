@@ -36,6 +36,10 @@
     .lang-switch { float: right; }
     .lang-switch a { margin-left: 10px; }
     .lang-switch .active-lang { font-weight: bold; border-bottom: 2px solid #66c0f4; }
+    .search-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin: 16px 0; }
+    .search-form .field { margin: 0; }
+    .search-form input, .search-form select { width: auto; min-width: 150px; }
+    th a { color: inherit; text-decoration: none; }
 </style>
 <head>
     <meta charset="utf-8">
