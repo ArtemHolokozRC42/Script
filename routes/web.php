@@ -19,6 +19,7 @@ Route::get('/contact', [ContactController::class, 'showContactForm'])->name('con
 Route::post('/contact', [ContactController::class, 'submitContactForm'])->name('contact.send');
 Route::get('/contact/thanks', [ContactController::class, 'showContactThanks'])->name('contact.thanks');
 Route::resource('country', CountryController::class);
+Route::get('/games/admin', [GameController::class, 'admin'])->name('games.admin');
 Route::resource('games', GameController::class);
 Route::get('/stats', [StatsController::class, 'pages'])->name('stats.pages');
 Route::get('/stats/detail', [StatsController::class, 'detail'])->name('stats.detail');
