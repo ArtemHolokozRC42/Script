@@ -4,14 +4,14 @@
 
 @section('content')
     @php
-        // Ссылка для заголовка: первый клик = по возрастанию, повторный = по убыванию
+        // Посилання для заголовка: перший клік = за зростанням, повторний = за спаданням
         $sortLink = function (string $field) {
             $next = request('sort') === $field ? '-' . $field : $field;
 
             return route('blog.admin', array_merge(request()->except('sort', 'page'), ['sort' => $next]));
         };
 
-        // Стрелка рядом с названием столбца, по которому идёт сортировка
+        // Стрілка поруч із назвою стовпця, за яким виконується сортування
         $arrow = fn (string $field) => match (request('sort')) {
             $field       => ' ↑',
             '-' . $field => ' ↓',
