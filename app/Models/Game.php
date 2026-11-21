@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Game extends Model
 {
     protected $fillable = [
-        'title', 'genre', 'developer', 'price', 'release_year', 'description',
+        'title', 'genre', 'developer', 'price', 'release_year', 'description','user_id',
     ];
 
     public function translations(): HasMany
@@ -40,5 +41,9 @@ class Game extends Model
     public function localizedDescription(?string $locale = null): ?string
     {
         return $this->translation($locale)?->description ?: $this->description;
+    }
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

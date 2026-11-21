@@ -58,7 +58,11 @@ class GameController extends Controller
     {
         $data = $request->validated();
 
-        $game = Game::create(Arr::except($data, ['platforms']));
+        $game = Game::create([
+            ...Arr::except($data, ['platforms']),
+            'user_id' => $request->user()->id,
+        ]);
+
         $game->platforms()->sync($data['platforms'] ?? []);
 
         return redirect()->route('games.index');
