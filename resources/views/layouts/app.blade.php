@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="uk">
 <style>
+    .nav-form { display: inline; }
+    nav .nav-form button { background: transparent; color: #c7d5e0; padding: 0; margin-left: 20px; cursor: pointer; font: inherit; }
+    nav .nav-form button:hover { color: #66c0f4; }
+    .pagination { background: transparent; padding: 0; }
     .tags { margin: 10px 0; }
     .tag { display: inline-block; background: #e8eef5; border-radius: 4px; padding: 2px 8px; margin: 0 4px 4px 0; font-size: 13px; }
     .blog-filters a { margin-right: 12px; }
@@ -49,23 +53,40 @@
 </head>
 <body>
 <nav>
-    <a href="{{ url('/') }}">Головна</a>
-    <a href="{{ route('games.index') }}">Каталог ігор</a>
-    <a href="{{ url('/library') }}">Бібліотека</a>
-    <a href="{{ url('/about') }}">Про платформу</a>
-    <a href="{{ url('/contact') }}">Контакти</a>
-    <a href="{{ route('country.index') }}">Країни</a>
-    <a href="{{ route('blog.index') }}">Блог</a>
-    <a href="{{ route('blog.admin') }}">Адмін блогу</a>
-    <a href="{{ route('filters.index') }}">Мітки</a>
-    <a href="{{ route('platforms.index') }}">Платформи</a>
-    <span class="lang-switch">
-    @foreach (config('app.supported_locales') as $code => $label)
-            <a href="{{ request()->fullUrlWithQuery(['lang' => $code]) }}"
-           @class(['active-lang' => app()->getLocale() === $code])>{{ strtoupper($code) }}</a>
-        @endforeach
-</span>
-</nav>
+        <a href="{{ url('/') }}">Головна</a>
+        <a href="{{ route('games.index') }}">Каталог ігор</a>
+        <a href="{{ route('platforms.index') }}">Платформи</a>
+        <a href="{{ route('blog.index') }}">Блог</a>
+        <a href="{{ route('country.index') }}">Країни</a>
+        <a href="{{ route('contact.show') }}">Контакти</a>
+
+        @auth
+            <a href="{{ route('dashboard') }}">Особистий кабінет</a>
+            <a href="{{ route('games.admin') }}">Керування іграми</a>
+            <a href="{{ route('blog.admin') }}">Керування блогом</a>
+            <a href="{{ route('filters.index') }}">Мітки</a>
+            <a href="{{ route('stats.pages') }}">Статистика</a>
+            <a href="{{ route('users.index') }}">Користувачі</a>
+            <a href="{{ route('profile.edit') }}">Мій профіль</a>
+
+            <form method="POST" action="{{ route('logout') }}" class="nav-form">
+                @csrf
+                <button type="submit">Вийти ({{ auth()->user()->name }})</button>
+            </form>
+        @endauth
+
+        @guest
+            <a href="{{ route('login') }}">Увійти</a>
+            <a href="{{ route('register') }}">Реєстрація</a>
+        @endguest
+
+        <span class="lang-switch">
+        @foreach (config('app.supported_locales') as $code => $label)
+                <a href="{{ request()->fullUrlWithQuery(['lang' => $code]) }}"
+               @class(['active-lang' => app()->getLocale() === $code])>{{ strtoupper($code) }}</a>
+            @endforeach
+    </span>
+    </nav>
 <main>
     @yield('content')
 </main>
